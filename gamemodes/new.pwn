@@ -23107,7 +23107,11 @@ CMD:asellbiz(playerid, params[])
 
 	PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 	new query_string[200 + MAX_PLAYER_NAME + 1];
-	format(query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[b-1][b_id]);
+	b_info[b-1][b_improve][0] = 0;
+	b_info[b-1][b_improve][1] = 0;
+	b_info[b-1][b_improve][2] = 0;
+	
+	format(query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[b-1][b_id]);
 	mysql_tquery(sql_connection, query_string);
 
 	if(b_info[b-1][b_type] == bizz_type_bar || b_info[b-1][b_type] == bizz_type_club || b_info[b-1][b_type] == bizz_type_cafe || b_info[b-1][b_type] == bizz_type_pharm || b_info[b-1][b_type] == bizz_type_electronic || b_info[b-1][b_type] == bizz_type_shop || b_info[b-1][b_type] == bizz_type_clothes || b_info[b-1][b_type] == bizz_type_carshop)
@@ -38307,9 +38311,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 			new query_string[200 + MAX_PLAYER_NAME + 1];
-			format(query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[b][b_id]);
+			b_info[b][b_improve][0] = 0;
+			b_info[b][b_improve][1] = 0;
+			b_info[b][b_improve][2] = 0;
+			format(query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[b][b_id]);
 			mysql_tquery(sql_connection, query_string);
-
+			
 			PlayerInfo[playerid][business] = -1;
 			update_int_sql(playerid, "u_business", PlayerInfo[playerid][business]);
 
@@ -52265,7 +52272,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						b_info[business_id][b_owner_inc] = -1;
 
 						new query_string[200 + MAX_PLAYER_NAME + 1];
-						format(query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
+						b_info[business_id][b_improve][0] = 0;
+      					b_info[business_id][b_improve][1] = 0;
+      					b_info[business_id][b_improve][2] = 0;
+						format(query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
 						mysql_tquery(sql_connection, query_string);
 
 						if(b_info[business_id][b_type] == bizz_type_bar || b_info[business_id][b_type] == bizz_type_pharm || b_info[business_id][b_type] == bizz_type_electronic || b_info[business_id][b_type] == bizz_type_club || b_info[business_id][b_type] == bizz_type_cafe || b_info[business_id][b_type] == bizz_type_shop || b_info[business_id][b_type] == bizz_type_clothes || b_info[business_id][b_type] == bizz_type_carshop)
@@ -52319,7 +52329,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						b_info[business_id][b_owner_inc] = -1;
 
 						new _query_string[200 + MAX_PLAYER_NAME + 1];
-						format(_query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
+						b_info[business_id][b_improve][0] = 0;
+      					b_info[business_id][b_improve][1] = 0;
+      					b_info[business_id][b_improve][2] = 0;
+						format(_query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
 						mysql_tquery(sql_connection, _query_string);
 
 						if(b_info[business_id][b_type] == bizz_type_bar || b_info[business_id][b_type] == bizz_type_pharm || b_info[business_id][b_type] == bizz_type_electronic || b_info[business_id][b_type] == bizz_type_club || b_info[business_id][b_type] == bizz_type_cafe || b_info[business_id][b_type] == bizz_type_shop || b_info[business_id][b_type] == bizz_type_clothes || b_info[business_id][b_type] == bizz_type_carshop)
