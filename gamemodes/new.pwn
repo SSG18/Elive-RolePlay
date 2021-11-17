@@ -23107,7 +23107,11 @@ CMD:asellbiz(playerid, params[])
 
 	PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 	new query_string[200 + MAX_PLAYER_NAME + 1];
-	format(query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[b-1][b_id]);
+	b_info[b-1][b_improve][0] = 0;
+	b_info[b-1][b_improve][1] = 0;
+	b_info[b-1][b_improve][2] = 0;
+	
+	format(query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[b-1][b_id]);
 	mysql_tquery(sql_connection, query_string);
 
 	if(b_info[b-1][b_type] == bizz_type_bar || b_info[b-1][b_type] == bizz_type_club || b_info[b-1][b_type] == bizz_type_cafe || b_info[b-1][b_type] == bizz_type_pharm || b_info[b-1][b_type] == bizz_type_electronic || b_info[b-1][b_type] == bizz_type_shop || b_info[b-1][b_type] == bizz_type_clothes || b_info[b-1][b_type] == bizz_type_carshop)
@@ -31311,7 +31315,13 @@ cmd:updorms(playerid, params[])
 {
 	if(PlayerInfo[playerid][admin] < 8) return 1;
 
-	dorm_count[DORM_SAWMILL] = dorm_count[DORM_MINE] = dorm_count[DORM_FACTORY_GUNS] = dorm_count[DORM_FACTORY_MINE] = dorm_count[DORM_FACTORY_WOOD] = 1000000;
+	dorm_count[DORM_SAWMILL] = 1000000;
+ 	dorm_count[DORM_MINE] = 1000000;
+ 	dorm_count[DORM_FACTORY_GUNS] = 1000000;
+ 	dorm_count[DORM_FACTORY_MINE] = 1000000;
+ 	dorm_count[DORM_FACTORY_WOOD] = 1000000;
+    SaveDorms();
+    SendClientMessage(playerid, COLOR_WHITE, "Склады начальных работ успешно пополнены!");
 	return 1;
 }
 
@@ -38301,9 +38311,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 			new query_string[200 + MAX_PLAYER_NAME + 1];
-			format(query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[b][b_id]);
+			b_info[b][b_improve][0] = 0;
+			b_info[b][b_improve][1] = 0;
+			b_info[b][b_improve][2] = 0;
+			format(query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[b][b_id]);
 			mysql_tquery(sql_connection, query_string);
-
+			
 			PlayerInfo[playerid][business] = -1;
 			update_int_sql(playerid, "u_business", PlayerInfo[playerid][business]);
 
@@ -52259,7 +52272,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						b_info[business_id][b_owner_inc] = -1;
 
 						new query_string[200 + MAX_PLAYER_NAME + 1];
-						format(query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
+						b_info[business_id][b_improve][0] = 0;
+      					b_info[business_id][b_improve][1] = 0;
+      					b_info[business_id][b_improve][2] = 0;
+						format(query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
 						mysql_tquery(sql_connection, query_string);
 
 						if(b_info[business_id][b_type] == bizz_type_bar || b_info[business_id][b_type] == bizz_type_pharm || b_info[business_id][b_type] == bizz_type_electronic || b_info[business_id][b_type] == bizz_type_club || b_info[business_id][b_type] == bizz_type_cafe || b_info[business_id][b_type] == bizz_type_shop || b_info[business_id][b_type] == bizz_type_clothes || b_info[business_id][b_type] == bizz_type_carshop)
@@ -52313,7 +52329,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						b_info[business_id][b_owner_inc] = -1;
 
 						new _query_string[200 + MAX_PLAYER_NAME + 1];
-						format(_query_string, 136,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
+						b_info[business_id][b_improve][0] = 0;
+      					b_info[business_id][b_improve][1] = 0;
+      					b_info[business_id][b_improve][2] = 0;
+						format(_query_string, 161,"UPDATE `businesses` SET `b_owner_inc` = '-1', `b_owner_name` = 'The State', `b_improve` = '0|0|0' WHERE `b_id` = '%d' LIMIT 1", b_info[business_id][b_id]);
 						mysql_tquery(sql_connection, _query_string);
 
 						if(b_info[business_id][b_type] == bizz_type_bar || b_info[business_id][b_type] == bizz_type_pharm || b_info[business_id][b_type] == bizz_type_electronic || b_info[business_id][b_type] == bizz_type_club || b_info[business_id][b_type] == bizz_type_cafe || b_info[business_id][b_type] == bizz_type_shop || b_info[business_id][b_type] == bizz_type_clothes || b_info[business_id][b_type] == bizz_type_carshop)
@@ -70230,7 +70249,35 @@ stock TranslateText(string[])
 	}
 	return result;
 }
+stock SaveDorms()
+{
+	new _sql_string[112];
+    format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '1' LIMIT 1", dorm_count[DORM_SAWMILL]);
+	mysql_query(sql_connection, _sql_string);
 
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '2' LIMIT 1", dorm_count[DORM_MINE]);
+	mysql_query(sql_connection, _sql_string);
+
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '3' LIMIT 1", dorm_count[DORM_FACTORY_GUNS]);
+	mysql_query(sql_connection, _sql_string);
+
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '4' LIMIT 1", mine_count[MINE_MELTED]);
+	mysql_query(sql_connection, _sql_string);
+
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '5' LIMIT 1", mine_count[MINE_UNMELTED]);
+	mysql_query(sql_connection, _sql_string);
+
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '6' LIMIT 1", dorm_count[DORM_FACTORY_MINE]);
+	mysql_query(sql_connection, _sql_string);
+
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '7' LIMIT 1", dorm_count[DORM_FACTORY_WOOD]);
+	mysql_query(sql_connection, _sql_string);
+
+	format(_sql_string, 112, "UPDATE `server_variables` SET `var_count` = '%d' WHERE `var_id` = '8' LIMIT 1", election_status);
+	mysql_query(sql_connection, _sql_string);
+	
+	return true;
+}
 /*stock LoadMySQLSettings()
 {
 	new FileID = ini_openFile("mysql_settings.ini"),errCode;
